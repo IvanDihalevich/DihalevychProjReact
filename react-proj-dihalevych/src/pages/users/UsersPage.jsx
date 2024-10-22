@@ -3,7 +3,7 @@
 const UsersPage = () => {
   return (
     <div>
-      <h1>lox</h1>
+      <h1>Ivan</h1>
     </div>
   )
 }

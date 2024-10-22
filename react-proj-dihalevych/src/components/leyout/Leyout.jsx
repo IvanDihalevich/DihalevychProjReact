@@ -1,24 +1,29 @@
 import { Link, Outlet } from "react-router-dom";
+import '../../style/Leyout.css'
 
 const Leyout = () => {
   return (
     <>
-      <header>
+      <div className="sidebar">
         <nav>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/todo">ToDo</Link>
-          </li>
-          <li>
-            <Link to="/users">Users</Link>
-          </li>
+          <ul>
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+            <li>
+              <Link to="/todo">ToDo</Link>
+            </li>
+            <li>
+              <Link to="/users">Users</Link>
+            </li>
+          </ul>
         </nav>
-      </header>
-      <main>
-        <Outlet />
-      </main>
+      </div>
+      <div className="content">
+        <main>
+          <Outlet />
+        </main>
+      </div>
     </>
   );
 };
