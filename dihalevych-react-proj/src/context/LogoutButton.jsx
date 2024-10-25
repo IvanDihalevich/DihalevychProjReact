@@ -1,5 +1,5 @@
 // src/components/Auth/LogoutButton.jsx
-import { useAuth } from '../../context/authUtils';
+import { useAuth } from '../context/authUtils';
 
 const LogoutButton = () => {
   const { logout } = useAuth();
