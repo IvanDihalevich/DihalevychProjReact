@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import "../Auth/style/ErrorMessage.css";
 
 
 const ErrorMessage = ({ error }) => {

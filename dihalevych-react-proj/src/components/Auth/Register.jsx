@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/authUtils";
 import RegisterForm from "./RegisterForm";
 import ErrorMessage from "../Auth/ErorrMassage";
+import '../Auth/style/Login.css';
 
 const Register = () => {
   const [email, setEmail] = useState("");

@@ -3,6 +3,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../../context/authUtils";
 import ErrorMessage from "../Auth/ErorrMassage";
 import LoginForm from "./LoginForm";
+import '../Auth/style/Login.css';
 
 const Login = () => {
   const [email, setEmail] = useState("");

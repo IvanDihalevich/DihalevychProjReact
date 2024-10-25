@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import "../Auth/style/AuthForm.css";
 
 const LoginForm = ({ email, setEmail, password, setPassword, handleLogin }) => {
   return (
