@@ -1,9 +1,8 @@
 // src/context/AuthContext.jsx
 import PropTypes from "prop-types";
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { AuthContext } from './authUtils';
-
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "./authUtils";
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
@@ -13,15 +12,17 @@ export const AuthProvider = ({ children }) => {
   const login = (email, password) => {
     const users = [
       { email: "admin@example.com", password: "admin123", isAdmin: true },
-      { email: "user@example.com", password: "user123", isAdmin: false }
+      { email: "user@example.com", password: "user123", isAdmin: false },
     ];
 
-    const user = users.find(u => u.email === email && u.password === password);
+    const user = users.find(
+      (u) => u.email === email && u.password === password
+    );
 
     if (user) {
       setUser({ email: user.email, isAdmin: user.isAdmin });
       setError(null);
-      navigate('/');
+      navigate("/");
     } else {
       setError("Invalid email or password.");
     }
@@ -30,7 +31,7 @@ export const AuthProvider = ({ children }) => {
   const logout = () => {
     setUser(null);
     setError(null);
-    navigate('/login');
+    navigate("/login");
   };
 
   AuthProvider.propTypes = {

@@ -1,5 +1,5 @@
 import { Link, Outlet } from "react-router-dom";
-import '../../components/layout/style/Leyout.css'
+import '../../components/layout/style/Layout.css';
 import LogoutButton from '../../context/LogoutButton';
 
 const Leyout = () => {
@@ -16,6 +16,9 @@ const Leyout = () => {
             </li>
             <li>
               <Link to="/users">Users</Link>
+            </li>
+            <li>
+              <Link to="/books">Books</Link>
             </li>
           </ul>
         </nav>

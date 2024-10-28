@@ -3,6 +3,7 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import Home from '../pages/home/HomePage';
 import ToDoPage from '../pages/todo/ToDoPage';
 import UserPage from '../pages/users/UsersPage';
+import BooksPage from '../pages/books/BooksPage';
 import Layout from '../components/layout/Layout';
 import NotFoundPage from '../components/layout/NotFoundPage';
 import Login from '../components/Auth/Login';
@@ -29,6 +30,7 @@ const BasicRouter = () => {
         <Route index element={<Home />} />
         <Route path="todo" element={<ToDoPage />} />
         <Route path="users" element={<UserPage />} />
+        <Route path="/books" element={<BooksPage/>} />
       </Route>
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
