@@ -14,25 +14,25 @@ const AirportsClient = () => {
   const [selectedAirport, setSelectedAirport] = useState(null);
   const [error, setError] = useState("");
 
+  const loadAirports = async () => {
+    try {
+      const data = await fetchAirports();
+      setAirports(data);
+      setError("");
+    } catch {
+      setError("Помилка при отриманні аеропортів");
+    }
+  };
+
   useEffect(() => {
-    // Завантажуємо всі аеропорти
-    const loadAirports = async () => {
-      try {
-        const data = await fetchAirports();
-        setAirports(data);
-      } catch {
-        setError("Помилка при отриманні аеропортів");
-      }
-    };
     loadAirports();
   }, []);
 
   const handleCreateAirport = async () => {
     try {
-      const createdAirport = await createAirport(newAirport);
-      setAirports([...airports, createdAirport]);
+      await createAirport(newAirport);
       setNewAirport({ name: "", location: "" });
-      setError("");
+      await loadAirports();
     } catch {
       setError("Помилка при створенні аеропорту");
     }
@@ -41,8 +41,7 @@ const AirportsClient = () => {
   const handleDeleteAirport = async (id) => {
     try {
       await deleteAirport(id);
-      setAirports(airports.filter((airport) => airport.id !== id));
-      setError("");
+      await loadAirports();
     } catch {
       setError("Помилка при видаленні аеропорту");
     }
@@ -52,7 +51,6 @@ const AirportsClient = () => {
     try {
       const airport = await fetchAirportById(id);
       setSelectedAirport(airport);
-      setError("");
     } catch {
       setError("Помилка при отриманні даних аеропорту");
     }
@@ -61,17 +59,9 @@ const AirportsClient = () => {
   const handleUpdateAirport = async () => {
     if (!selectedAirport) return;
     try {
-      const updatedAirport = await updateAirport(
-        selectedAirport.id,
-        selectedAirport
-      );
-      setAirports(
-        airports.map((airport) =>
-          airport.id === updatedAirport.id ? updatedAirport : airport
-        )
-      );
+      await updateAirport(selectedAirport.id, selectedAirport);
+      await loadAirports();
       setSelectedAirport(null);
-      setError("");
     } catch {
       setError("Помилка при оновленні аеропорту");
     }
