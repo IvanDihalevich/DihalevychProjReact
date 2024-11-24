@@ -14,10 +14,9 @@ const AirportsClient = () => {
   const [newAirport, setNewAirport] = useState({ name: "", location: "" });
   const [selectedAirport, setSelectedAirport] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
-  const [sortBy, setSortBy] = useState("name"); // Поле для сортування
+  const [sortBy, setSortBy] = useState("name");
   const [error, setError] = useState("");
 
-  // Завантаження списку аеропортів
   const loadAirports = async () => {
     try {
       const data = await fetchAirports();
@@ -33,11 +32,9 @@ const AirportsClient = () => {
     loadAirports();
   }, []);
 
-  // Функція для фільтрації та сортування
   useEffect(() => {
     let result = [...airports];
 
-    // Фільтрація
   if (searchQuery) {
     result = result.filter(
       (airport) =>
@@ -46,10 +43,9 @@ const AirportsClient = () => {
     );
   }
 
-  // Сортування
   result.sort((a, b) => {
-    const fieldA = a[sortBy]?.toLowerCase() || ""; // Приведення до нижнього регістру
-    const fieldB = b[sortBy]?.toLowerCase() || ""; // Приведення до нижнього регістру
+    const fieldA = a[sortBy]?.toLowerCase() || "";
+    const fieldB = b[sortBy]?.toLowerCase() || "";
 
     if (fieldA < fieldB) return -1;
     if (fieldA > fieldB) return 1;
@@ -59,7 +55,6 @@ const AirportsClient = () => {
     setFilteredAirports(result);
   }, [searchQuery, sortBy, airports]);
 
-  // Створення нового аеропорту
   const handleCreateAirport = async () => {
     try {
       await createAirport(newAirport);
@@ -70,7 +65,6 @@ const AirportsClient = () => {
     }
   };
 
-  // Видалення аеропорту
   const handleDeleteAirport = async (id) => {
     try {
       await deleteAirport(id);
@@ -80,7 +74,6 @@ const AirportsClient = () => {
     }
   };
 
-  // Вибір аеропорту для редагування
   const handleSelectAirport = async (id) => {
     try {
       const airport = await fetchAirportById(id);
@@ -90,7 +83,6 @@ const AirportsClient = () => {
     }
   };
 
-  // Оновлення аеропорту
   const handleUpdateAirport = async () => {
     if (!selectedAirport) return;
     try {
@@ -107,7 +99,6 @@ const AirportsClient = () => {
       <h1 className="title">Аеропорти</h1>
       {error && <p className="error-message">{error}</p>}
 
-      {/* Пошук */}
       <div className="search-container">
         <input
           type="text"
@@ -126,7 +117,6 @@ const AirportsClient = () => {
         </select>
       </div>
 
-      {/* Список аеропортів */}
       <ul className="airports-list">
         {filteredAirports.map((airport) => (
           <li key={airport.id} className="airport-item">
@@ -149,7 +139,6 @@ const AirportsClient = () => {
         ))}
       </ul>
 
-      {/* Додавання нового аеропорту */}
       <h2 className="subtitle">Додати новий аеропорт</h2>
       <div className="form-group">
         <input
@@ -175,7 +164,6 @@ const AirportsClient = () => {
         Додати
       </button>
 
-      {/* Редагування аеропорту */}
       {selectedAirport && (
         <>
           <h2 className="subtitle">Редагувати аеропорт</h2>
