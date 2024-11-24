@@ -1,6 +1,5 @@
 const BASE_URL = "http://localhost:5132";
 
-// Отримання списку всіх аеропортів
 export const fetchAirports = async () => {
     try {
         const response = await fetch(`${BASE_URL}/airports/getALL`);
@@ -14,7 +13,6 @@ export const fetchAirports = async () => {
     }
 };
 
-// Отримання даних конкретного аеропорту за ID
 export const fetchAirportById = async (id) => {
     try {
         const response = await fetch(`${BASE_URL}/airports/${id}`);
@@ -28,7 +26,6 @@ export const fetchAirportById = async (id) => {
     }
 };
 
-// Створення нового аеропорту
 export const createAirport = async (airport) => {
     try {
         const response = await fetch(`${BASE_URL}/airports/create`, {
@@ -46,7 +43,6 @@ export const createAirport = async (airport) => {
     }
 };
 
-// Оновлення даних аеропорту
 export const updateAirport = async (id, airport) => {
     try {
         const response = await fetch(`${BASE_URL}/airports/${id}`, {
@@ -63,8 +59,7 @@ export const updateAirport = async (id, airport) => {
         throw error;
     }
 };
-
-// Видалення аеропорту за ID
+ 
 export const deleteAirport = async (id) => {
     try {
         const response = await fetch(`${BASE_URL}/airports/${id}`, {

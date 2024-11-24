@@ -10,29 +10,56 @@ import {
 
 const AirportsClient = () => {
   const [airports, setAirports] = useState([]);
+  const [filteredAirports, setFilteredAirports] = useState([]);
   const [newAirport, setNewAirport] = useState({ name: "", location: "" });
   const [selectedAirport, setSelectedAirport] = useState(null);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [sortBy, setSortBy] = useState("name");
   const [error, setError] = useState("");
 
+  const loadAirports = async () => {
+    try {
+      const data = await fetchAirports();
+      setAirports(data);
+      setFilteredAirports(data);
+      setError("");
+    } catch {
+      setError("Помилка при отриманні аеропортів");
+    }
+  };
+
   useEffect(() => {
-    // Завантажуємо всі аеропорти
-    const loadAirports = async () => {
-      try {
-        const data = await fetchAirports();
-        setAirports(data);
-      } catch {
-        setError("Помилка при отриманні аеропортів");
-      }
-    };
     loadAirports();
   }, []);
 
+  useEffect(() => {
+    let result = [...airports];
+
+  if (searchQuery) {
+    result = result.filter(
+      (airport) =>
+        airport.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        airport.location.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+  }
+
+  result.sort((a, b) => {
+    const fieldA = a[sortBy]?.toLowerCase() || "";
+    const fieldB = b[sortBy]?.toLowerCase() || "";
+
+    if (fieldA < fieldB) return -1;
+    if (fieldA > fieldB) return 1;
+    return 0;
+  });
+
+    setFilteredAirports(result);
+  }, [searchQuery, sortBy, airports]);
+
   const handleCreateAirport = async () => {
     try {
-      const createdAirport = await createAirport(newAirport);
-      setAirports([...airports, createdAirport]);
+      await createAirport(newAirport);
       setNewAirport({ name: "", location: "" });
-      setError("");
+      await loadAirports();
     } catch {
       setError("Помилка при створенні аеропорту");
     }
@@ -41,8 +68,7 @@ const AirportsClient = () => {
   const handleDeleteAirport = async (id) => {
     try {
       await deleteAirport(id);
-      setAirports(airports.filter((airport) => airport.id !== id));
-      setError("");
+      await loadAirports();
     } catch {
       setError("Помилка при видаленні аеропорту");
     }
@@ -52,7 +78,6 @@ const AirportsClient = () => {
     try {
       const airport = await fetchAirportById(id);
       setSelectedAirport(airport);
-      setError("");
     } catch {
       setError("Помилка при отриманні даних аеропорту");
     }
@@ -61,17 +86,9 @@ const AirportsClient = () => {
   const handleUpdateAirport = async () => {
     if (!selectedAirport) return;
     try {
-      const updatedAirport = await updateAirport(
-        selectedAirport.id,
-        selectedAirport
-      );
-      setAirports(
-        airports.map((airport) =>
-          airport.id === updatedAirport.id ? updatedAirport : airport
-        )
-      );
+      await updateAirport(selectedAirport.id, selectedAirport);
+      await loadAirports();
       setSelectedAirport(null);
-      setError("");
     } catch {
       setError("Помилка при оновленні аеропорту");
     }
@@ -82,8 +99,26 @@ const AirportsClient = () => {
       <h1 className="title">Аеропорти</h1>
       {error && <p className="error-message">{error}</p>}
 
+      <div className="search-container">
+        <input
+          type="text"
+          className="input search-input"
+          placeholder="Пошук за назвою або локацією"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+        />
+        <select
+          className="input sort-select"
+          value={sortBy}
+          onChange={(e) => setSortBy(e.target.value)}
+        >
+          <option value="name">Сортувати за назвою</option>
+          <option value="location">Сортувати за локацією</option>
+        </select>
+      </div>
+
       <ul className="airports-list">
-        {airports.map((airport) => (
+        {filteredAirports.map((airport) => (
           <li key={airport.id} className="airport-item">
             <span>
               {airport.name} - {airport.location}
