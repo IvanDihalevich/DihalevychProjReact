@@ -8,6 +8,8 @@ import Layout from '../components/layout/Layout';
 import NotFoundPage from '../components/layout/NotFoundPage';
 import Login from '../components/Auth/Login';
 import Register from '../components/Auth/Register';
+import AirportsPage from '../pages/airports/AirportsPage';
+
 import { useAuth } from '../context/authUtils';
 
 const PrivateRoute = ({ children }) => {
@@ -31,6 +33,7 @@ const BasicRouter = () => {
         <Route path="todo" element={<ToDoPage />} />
         <Route path="users" element={<UserPage />} />
         <Route path="/books" element={<BooksPage/>} />
+        <Route path="airports" element={<AirportsPage/>} />
       </Route>
       <Route path="*" element={<NotFoundPage />} />
     </Routes>

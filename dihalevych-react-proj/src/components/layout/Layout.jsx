@@ -1,6 +1,6 @@
 import { Link, Outlet } from "react-router-dom";
-import '../../components/layout/style/Layout.css';
-import LogoutButton from '../../context/LogoutButton';
+import "../../components/layout/style/Layout.css";
+import LogoutButton from "../../context/LogoutButton";
 
 const Leyout = () => {
   return (
@@ -19,6 +19,9 @@ const Leyout = () => {
             </li>
             <li>
               <Link to="/books">Books</Link>
+            </li>
+            <li>
+              <Link to="/airports">Airports</Link>
             </li>
           </ul>
         </nav>
