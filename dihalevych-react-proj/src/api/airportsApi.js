@@ -59,7 +59,7 @@ export const updateAirport = async (id, airport) => {
         throw error;
     }
 };
-
+ 
 export const deleteAirport = async (id) => {
     try {
         const response = await fetch(`${BASE_URL}/airports/${id}`, {
