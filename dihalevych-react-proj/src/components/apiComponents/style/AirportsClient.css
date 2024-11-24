@@ -1,0 +1,90 @@
+.airports-container {
+    font-family: 'Arial', sans-serif;
+    padding: 20px;
+    background-color: #f4f7fc;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.title {
+    text-align: center;
+    font-size: 2rem;
+    color: #333;
+}
+
+.error-message {
+    color: red;
+    font-size: 1rem;
+    text-align: center;
+}
+
+.airports-list {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+}
+
+.airport-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
+}
+
+.airport-item span {
+    font-size: 1rem;
+}
+
+.btn {
+    padding: 8px 16px;
+    font-size: 0.875rem;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+}
+
+.details-btn {
+    background-color: #007bff;
+    color: white;
+}
+
+.delete-btn {
+    background-color: #dc3545;
+    color: white;
+}
+
+.add-btn {
+    background-color: #28a745;
+    color: white;
+    margin-top: 10px;
+}
+
+.update-btn {
+    background-color: #ffc107;
+    color: white;
+    margin-top: 10px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.input {
+    padding: 8px 16px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+}
+
+.subtitle {
+    font-size: 1.5rem;
+    margin-top: 30px;
+    text-align: center;
+}
